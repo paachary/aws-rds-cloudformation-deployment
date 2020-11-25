@@ -107,14 +107,10 @@ Resources:
           - '/cloudformation-templates/'
           - 'natgw-resources.yaml'
 
-  PostgresDBInstanceStack:
+  RdsPostgresDBInstanceStack:
     Type: AWS::CloudFormation::Stack
     DependsOn: NatGatewayStack
     Properties:
-
-      Parameters:
-        KeyName: !Ref KeyName
-        InstanceAmiId: !Ref InstanceAmiId
 
       TemplateURL: 
         !Join
@@ -124,11 +120,11 @@ Resources:
           - '.amazonaws.com/'
           - !ImportValue s3-templates-bucket
           - '/cloudformation-templates/'
-          - 'nested-postgres-db-resources.yaml'
+          - 'rds-resources.yaml'
 
   WebappInstanceStack:
     Type: AWS::CloudFormation::Stack
-    DependsOn: PostgresDBInstanceStack
+    DependsOn: RdsPostgresDBInstanceStack
     Properties:
 
       Parameters:
