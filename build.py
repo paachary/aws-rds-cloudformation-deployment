@@ -185,7 +185,7 @@ def cleanup_env():
     cfn_client = boto3.client('cloudformation')
 
     response = cfn_client.list_stacks(
-        StackStatusFilter=['CREATE_COMPLETE']
+        StackStatusFilter=['CREATE_COMPLETE','ROLLBACK_COMPLETE']
     )
 
     stack_info = response['StackSummaries']
