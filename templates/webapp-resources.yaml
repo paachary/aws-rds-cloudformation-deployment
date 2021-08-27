@@ -102,10 +102,11 @@ Resources:
                   rm -fr /usr/local/bin/aws
                   curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
                   unzip awscli-bundle.zip
-                  ./awscli-bundle/install -b ~/bin/aws
+                  ln -fs /usr/bin/python3 /usr/bin/python
                   ln -fs /usr/bin/pip-3.7 /usr/bin/pip
                   ln -fs /usr/bin/pip-3 /usr/bin/pip
                   ln -fs /usr/bin/pip3 /usr/bin/pip
+                  ./awscli-bundle/install -b ~/bin/aws
                   aws configure set region `curl --silent http://169.254.169.254/latest/dynamic/instance-identity/document | jq -r .region`
                 group: root
                 mode: '000755'
