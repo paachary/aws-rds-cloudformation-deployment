@@ -1,2 +1,6 @@
 [
+    {
+        "ParameterKey": "MultiAZ",
+        "ParameterValue": "true"
+    }
 ]

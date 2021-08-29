@@ -137,7 +137,9 @@ def create_stack(*stacks, **kwargs):
         print("\nERROR!! Specify atleast one stack to be created. \nSyntax: create-stack[value1, value2, ...]. \n"+
         "Valid values are: \n\n" + 
             "   webapp-nested-resources -> Creates network-resources, natgw-resources, ssm-resources, rds-resources, webapp-resources. \n" + 
-                " If you choose to create the individual resources, please choose all or any of the following stacks.\n\n\n" +
+                "\nIf you choose to create the individual resources, please choose all or any of the following stacks.\n\n" +
+                " \t\texample: \n\t\t\tpynt create_stack[\"network-resources\"]. \n\t\t\tOR\n" +
+                "\t\t\tpynt create_stack[\"network-resources\",\"natgw-resources\"]. \n\n"
             "   network-resources       -> Creates a custom VPC and its related resources [subnets, route tables, igw]. \n" +
             "   natgw-resources         -> Creates a nat gateway in one of the public subnets and an associated route table with a private subnet mapping. \n"+
             "   ssm-resources           -> Creates required ssm parameters for rds-resources and webapp-resouces template to use. \n" +
@@ -154,7 +156,17 @@ def delete_stack(* stacks):
     '''Delete stacks using CloudFormation.'''
 
     if len(stacks) == 0:
-        print("ERROR: Please specify a stack to delete.")
+        print("\nERROR!! Specify atleast one stack to be deleted. \nSyntax: create-stack[value1, value2, ...]. \n"+
+        "Valid values are: \n\n" + 
+            "   webapp-nested-resources -> Deletes network-resources, natgw-resources, ssm-resources, rds-resources, webapp-resources. \n" + 
+                "\nIf you choose to delete the individual resources, please choose all or any of the following stacks.\n\n" +
+                " \t\texample: pynt delete_stack[\"network-resources\"]. \n\t\t\tOR\n" +
+                " \t\t\tpynt delete_stack[\"network-resources\",\"natgw-resources\"]. \n\n" +
+            "   network-resources       -> Deletes the custom VPC and its related resources [subnets, route tables, igw]. \n" +
+            "   natgw-resources         -> Deletes the nat gateway in one of the public subnets and an associated route table with a private subnet mapping. \n"+
+            "   ssm-resources           -> Deletes the ssm parameters for rds-resources and webapp-resouces template to use. \n" +
+            "   rds-resources           -> Deletes the rds instance with a postgres db in a private subnet.\n" +
+            "   webapp-resources        -> Deletes the ec2 instance with a python Flask webapp hosted on it in a public subnet.")
         return
 
     for stack in stacks:

@@ -3,6 +3,18 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description:
   A template for creating SSM parameters from a list of common parameters.
 
+Parameters:
+  MultiAZ:
+    Description: Does this deployment support multi-availability-zone
+    Type: 'String'
+    Default: No
+    AllowedValues:
+      - Yes
+      - No
+
+Conditions:
+  isSingleAZ: !Equals [ !Ref MultiAZ, No ]
+
 Resources:
 
   PostgresDBSecurityGroup:
@@ -34,7 +46,7 @@ Resources:
     Type: AWS::RDS::DBInstance
     Properties: 
       AllocatedStorage: 20
-      AvailabilityZone: !Select [0, !GetAZs '']
+      AvailabilityZone: !If [ isSingleAZ, [!Select [0, !GetAZs '']] , !Ref AWS::NoValue]
       BackupRetentionPeriod: 0
       DBInstanceClass: "{{resolve:ssm:RdsInstanceType:1}}"
       DBName: "{{resolve:ssm:PostgresDb:1}}"
@@ -45,7 +57,7 @@ Resources:
       EngineVersion: 10.13
       MasterUsername:  "{{resolve:ssm:PostgresUser:1}}"
       MasterUserPassword: '{{resolve:secretsmanager:PostgresRdsDbSecretPwd:SecretString:password}}'
-      MultiAZ: false
+      MultiAZ: !If [ isSingleAZ, false, true ]
       Port: 5432
       PubliclyAccessible: false
       StorageType: gp2

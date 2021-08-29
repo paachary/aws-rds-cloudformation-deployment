@@ -110,7 +110,17 @@ Resources:
   RdsPostgresDBInstanceStack:
     Type: AWS::CloudFormation::Stack
     DependsOn: NatGatewayStack
+
     Properties:
+
+      Parameters:
+        MultiAZ:
+          Description: Does this deployment support multi-availability-zone
+          Type: 'String'
+          Default: No
+          AllowedValues:
+            - Yes
+            - No
 
       TemplateURL: 
         !Join

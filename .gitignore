@@ -128,3 +128,26 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+myenv/bin/activate
+myenv/bin/activate_this.py
+myenv/bin/activate.csh
+myenv/bin/activate.fish
+myenv/bin/activate.ps1
+myenv/bin/activate.xsh
+myenv/bin/easy_install
+myenv/bin/easy_install-3.8
+myenv/bin/easy_install3
+myenv/bin/jp.py
+myenv/bin/pip
+myenv/bin/pip-3.8
+myenv/bin/pip3
+myenv/bin/pip3.8
+myenv/bin/pynt
+myenv/bin/python
+myenv/bin/python3
+myenv/bin/python3.8
+myenv/bin/virtualenv
+myenv/bin/wheel
+myenv/bin/wheel-3.8
+myenv/bin/wheel3
+myenv/pyvenv.cfg
