@@ -115,18 +115,9 @@ def create_nested_stack(*stacks):
     """ Creating cloudformation nested stack. The argument to this function is the parent stack name (s) """
 
     if len(stacks) == 0:
-        print("\nERROR!! Specify atleast one stack to be created. \nSyntax: create-stack[value1, value2, ...]. \n"+
-        "Valid values are: \n\n" + 
-            "   webapp-nested-resources -> Creates network-resources, natgw-resources, ssm-resources, rds-resources, webapp-resources. \n" + 
-                " If you choose to create the individual resources, please choose pynt create_stack[] option.")
-        return                
+        stacks=["webapp-nested-resources"]
 
     create_stack(*stacks)
-
-    print("Emptying the temporary s3 bucket contents and deleting the S3 bucket...")
-
-    _empty_s3_contents("s3-resources")
-    delete_stack("s3-resources")
 
 
 @task(_check_aws_settings)
